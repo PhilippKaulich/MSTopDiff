@@ -18,6 +18,11 @@ class Histogram:
     """ """
     def __init__(self):
          pass
+     
+    def _show_progress(self, count_var, total_count): 
+         if count_var % int(total_count/10) == 0: # show in 10% steps 
+                progress_percentage = int(count_var / total_count * 100)
+                print ("Calculate Histogram ...",  progress_percentage, "%")
     
     def calculate_histogram(self, values: list, intensities1: list = [], \
                             intensities2: list = [], bin_size: int = 0.01) \
@@ -70,12 +75,19 @@ class Histogram:
         # If no intensites were applied, hist_values1/2 = hist_numbers
         if not intensities1: intensities1 = [1 for i in hist_bins]
         if not intensities2: intensities2 = [1 for i in hist_bins]
+        # progress
+        total_count = len(values)
+        count_var = 0
         for value, intensity1, intensity2 in zip(values, intensities1, intensities2):
             # Bin-Position in Histogram
             pos = math.ceil(abs(value) / bin_size) 
             hist_values1[pos] += intensity1
             hist_values2[pos] -= intensity2
             hist_numbers[pos] += 1
+            # progress
+            self._show_progress(count_var, total_count)
+            count_var += 1
+            
         for index, (bin_, number, intensity1, intensity2) in \
                     enumerate(zip(hist_bins, hist_numbers, 
                                   hist_values1, hist_values2)):
@@ -83,6 +95,7 @@ class Histogram:
             hist_numbersXvalues2[index] = number * intensity2
         return hist_bins, hist_numbers, hist_values1, hist_values2, \
             hist_numbersXvalues1, hist_numbersXvalues2
+    
     
     
     def _plot(self,x: list, y: list, xlabel: str = "", ylabel: str = "", 
