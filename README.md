@@ -5,7 +5,7 @@
 <img src="https://img.shields.io/pypi/l/MSDIFF" alt="License">
 </p>
 
-**MSTopDif is a command line script with graphical user interface for the database-free detection of modifications in top-down mass spectrometric data.**
+**MSTopDiff is a command line script with graphical user interface for the database-free detection of modifications in top-down mass spectrometric data.**
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/65888185/133243768-fd004beb-63ff-4aa6-9dfb-3099123a7bf3.png" alt="MSTopDiff Priciple">
