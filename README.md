@@ -63,9 +63,9 @@ $ python GUI.py
 4. Press "Open file" to select deconvoluted mass feature file (`.tsv`, `.ms1ft`, `.csv` or other file format)
 5. Select the deconvolution algorithm that generated the mass feature file
 6. Optional: change default filter criteria (mass range, bin size, maximal charge and retention time difference)
-7. Press "Load Data": Script calculates all mass differences. This step may take a while depending on the number of mass features; please don't close the GUI during the calculation. After the calculation is completed, the number of calculated mass differences is displayed in the command line.
+7. Press "Load Data": The script calculates all mass differences. This step may take a while depending on the number of mass features and the computer configurations; please do not close the GUI during the calculation, even if the GUI freezes. The percentage progress of the calculation is displayed in the console.  After the calculation is completed, the number of calculated mass differences is displayed in the command line.
 8. Optional: change default parameter of mass difference plot (mass range, bin-size, plots that sould be shown, annotation of the plot)
-9. Press "Plot Data": Script generates interactive mass difference plots 
+9. Press "Plot Data": Script generates interactive mass difference diagrams. Depending on the number of considered mass features, the selected bin size and the computer configurations the calculation of the histogram may take a while. Also, please do not close the GUI in case the GUI freezes. The percentage progress of the histogram calculation is displayed in the console. 
 10. Optional: change default RT shift analysis parameter (mass, tolerance, bin size) and press "Plot RT shift". Script generates RT shift plot. 
 
 
