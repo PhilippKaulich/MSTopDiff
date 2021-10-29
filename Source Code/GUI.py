@@ -7,7 +7,7 @@ Created on Sun Sep  5 20:41:57 2021
 
 import sys
 import pickle
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtWidgets import QWidget, QFileDialog, QTextEdit, QVBoxLayout, QScrollArea
 
 import MS1Differences as MSDIFF_MS1
@@ -15,6 +15,8 @@ from Settings import Settings
 from DataStructure import General
 
 
+# enable scaling high-DPI mode 
+QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) 
 
 
 class Ui(QtWidgets.QMainWindow):
