@@ -123,6 +123,12 @@ class MS1Differences():
         return (mass_difference, higher_mass, higher_mass_intensity, 
                 lower_mass, lower_mass_intensity)
 
+    def _show_progress(self, count, total_number_percentage, total_number):
+        """ """
+        if count % total_number_percentage == 0: 
+            progress_percentage = int(count / total_number * 100)
+            print ("Progress...",  progress_percentage, "%")
+
     
 
     def calculateMS1Differences(self, rt_diff_max: float = Settings.deltamass_rt_diff_max, 
@@ -155,6 +161,11 @@ class MS1Differences():
         # save Data settings
         self.Data.rt_diff_max = rt_diff_max
         self.Data.charge_diff_max = charge_diff_max
+        
+        # progress
+        total_calculations: int = int(self.Data.number_of_elements**2 / 2)
+        total_calculations_percentage: int = int(total_calculations / 100)
+        count_var: int = 0
 
         # Calculation of MS1 differences for each mass feature to all other 
         # higher mass features. 
@@ -171,6 +182,12 @@ class MS1Differences():
                 charge2_low = self.Data.min_charge[j]
                 charge1_max = self.Data.max_charge[i]
                 charge2_max = self.Data.max_charge[j]
+        
+                # progress 
+                count_var += 1
+                self._show_progress(count_var, total_calculations_percentage, 
+                                    total_calculations)
+
                 # filter criteria for mass difference calculation
                 if self._is_over_maximal_rt_shift(elution_time1, 
                     elution_time2, rt_diff_max, self.Data.rt_factor): continue
@@ -190,6 +207,7 @@ class MS1Differences():
                     higher_mass, higher_mass_intensity, lower_mass, 
                     lower_mass_intensity, rt_difference)
                 
+
         print ("Number of calculated delta masses", len(self.Data.Results.results))
         return self.Data.Results.results
        
