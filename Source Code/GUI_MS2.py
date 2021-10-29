@@ -5,7 +5,7 @@ Created on Tue Sep  7 08:02:26 2021
 @author: Phili
 """
 
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, \
                 QFileDialog, QCompleter, QMainWindow, QVBoxLayout, QTextEdit
 import sys
@@ -18,11 +18,15 @@ from Settings import Settings
 from DataStructure import General
 
 
+# enable scaling for high-DPI mode 
+QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+        
+        
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
         super(Ui, self).__init__()
-        uic.loadUi('MS2TopDiff_GUI.ui', self)
+        uic.loadUi('MS2TopDiff_GUI.ui', self) 
         self.show()
         
         #### 
@@ -59,7 +63,7 @@ class Ui(QtWidgets.QMainWindow):
         
     def open_file(self):
         self.setWindowTitle(Settings.gui_title + " - Open file ...")
-        file_filter = 'Deconvoluted MS2 spectra (*.msalign);; All Files (*)'
+        file_filter = 'Deconvoluted MS2 spectra file (*.msalign);; All Files (*)'
         initialFilter = 'Deconvoluted MS2 spectra file (*.msalign)'
         self.file_name = QFileDialog.getOpenFileName(caption = 'Load results',
             directory = '', filter = file_filter, initialFilter = initialFilter)[0]
