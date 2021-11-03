@@ -24,6 +24,7 @@
     - [Histogram](#histogram)
     - [Intensity-based histogram](#intensity-based-histogram)
     - [Intensity×Count histogram](#IntensityxCount-histogram)
+- [Troubleshooting](#troubleshooting)
 - [References](#references)
 - [License](#license)
 
@@ -136,6 +137,12 @@ This plot is based on feature intensity instead of count. This procedure can red
 ### Intensity×Count histogram
 The last plot constitutes a variation of the intensity-based plot that pushes emphasis towards mass features that are either high in intensity, frequency, or a combination of the two. By multiplying feature count by the sum intensity for each mass shift bin, commonly occurring mass shifts, or mass shifts observed with high intensity, are amplified. This enables for the rapid visual detection of auspicious mass differences that are otherwise difficult to pick out from background mass shifts. 
 
+## Troubleshooting
+| Problem | Solution |
+| --- | --- |
+| The GUI is displayed incorrectly. The window and the button labels are too small.  | It is possible that using a high-DPI screen is causing this problem (https://doc.qt.io/qt-5/highdpi.html). Try lowering the scaling of your screen manually in the operation system settings. |
+| The export function is grayed out and not clickable, although a histogram has been calculated. | Close all histogram windows and try again. |
+| The GUI freezes during the calculation. | The freezing of the graphical user interface is due to the computationally intensive calculation of the mass differences. Depending on the data and your computer configuration, the calculation may take a while. It is important that you do not close the graphical user interface until the calculations are complete. There is an output in the console that shows the estimated percentage of data already processed. |
 
 ## References
 - [Wu, Z.; Roberts, D.S.; Melby, J.A.; Wenger, K.; Wetzel, M.; Gu, Y.; Ramanathan, S.G.; Bayne, E.F.; Liu, X.; Sun, R.; Ong, I.M.; McIlwain, S.J.; **Ge, Y.** MASH Explorer: A Universal Software Environment for Top-Down Proteomics., *J. Proteome Res.*, 2020, 19 (9), 3867-3876.](https://pubmed.ncbi.nlm.nih.gov/32786689/)
