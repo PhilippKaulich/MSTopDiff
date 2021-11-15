@@ -8,7 +8,7 @@
 **MSTopDiff is a command line script with graphical user interface for the database-free detection of modifications in top-down mass spectrometric data.**
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/65888185/133243768-fd004beb-63ff-4aa6-9dfb-3099123a7bf3.png" alt="MSTopDiff Priciple">
+<img src="https://user-images.githubusercontent.com/65888185/141738370-b4fc4d08-8e96-4466-b564-0ecb5338bbf5.png" alt="MSTopDiff Priciple">
 </p>
 
 ---
@@ -75,8 +75,6 @@ To test the Script you can download the datasets in the "Datasets" folder, which
 
 
 ## Graphical User Interface
-The graphical user interface has two frames for the analysis of deconvoluted MS1 and MS2 data. 
-
 <p align="center">
 <img src="https://user-images.githubusercontent.com/65888185/133244101-fa47fbbe-1e60-401f-b67f-a54646b0eb7f.PNG" alt="GUI">
 </p>
@@ -155,4 +153,4 @@ If you are using the script, please cite:
 
 
 ## License
-MSDIFF is available under the BSD license. See the LICENSE file for more info.
+MSTopDiff is available under the BSD license. See the LICENSE file for more info.
