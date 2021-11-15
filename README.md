@@ -16,8 +16,8 @@
 ## Contents
 - [Abstract](#abstract)
 - [Requirements](#requirements)
-- [How to run MSTopDif](#how-to-run-mstopdif)
-- [How to use MSTopDif](#how-to-use-mstopdif)
+- [How to run MSTopDiff](#how-to-run-mstopdif)
+- [How to use MSTopDiff](#how-to-use-mstopdif)
 - [Data Sets for Testing](#data-sets-for-testing)
 - [Graphical User Interface](#graphical-user-interface)
 - [Results](#results)
@@ -32,7 +32,7 @@
 
 
 ## Abstract 
-> Top-down proteomics (TDP) analyses intact proteoforms with all their post-translational modifications, genetic and RNA splice variants. In addition, modifications introduced either deliberately or inadvertently during sample preparation, i.e., via oxidation, alkylation or labeling reagents, or through the formation of non-covalent adducts (e.g., detergents), further increase sample complexity. In order to facilitate recognition of protein modifications introduced during TD-analysis we developed MSTopDiff, a software tool with graphical user interface written in python capable to monitor and visualize protein modifications by calculating and visualizing mass differences in top-down data without the prerequisite of a database search. We demonstrate the successful application of MSTopDiff by the detection of artifacts originating from oxidation, formylation, overlabeling during isobaric labeling and adduct formation with cations or SDS. MSTopDiff offers several modes of data representation using deconvoluted MS1 or MS2 spectra. In addition to artificial modifications, the tool enables visualization of biological modifications such as phosphorylation and acetylation. MSTopDiff provides a facile overview on artificial and biological modifications in top-down proteomics samples, which makes it a valuable tool in quality control of standard workflows and for parameter evaluation during method development.
+> Top-down proteomics analyses intact proteoforms with all their post-translational modifications, genetic and RNA splice variants. In addition, modifications introduced either deliberately or inadvertently during sample preparation, i.e., via oxidation, alkylation or labeling reagents, or through the formation of non-covalent adducts (e.g., detergents), further increase sample complexity. In order to facilitate recognition of protein modifications introduced during top-down analysis we developed MSTopDiff, a software tool with a graphical user interface written in python, which allows to detect protein modifications by calculating and visualizing mass differences in top-down data without the prerequisite of a database search. We demonstrate the successful application of MSTopDiff for the detection of artifacts originating from oxidation, formylation, overlabeling during isobaric labeling and adduct formation with cations or SDS. MSTopDiff offers several modes of data representation using deconvoluted MS1 or MS2 spectra. In addition to artificial modifications, the tool enables visualization of biological modifications such as phosphorylation and acetylation. MSTopDiff provides an overview on artificial and biological modifications in top-down proteomics samples, which makes it a valuable tool in quality control of standard workflows and for parameter evaluation during method development.
 
 
 
@@ -50,17 +50,17 @@
 * `PyQt5`
 
 
-## How to run MSTopDif
+## How to run MSTopDiff
 > We recommend to install and use [Anaconda](https://www.anaconda.com/products/individual) and its build in command line prompt. In case you don't use Anaconda, make sure all required packages are [installed](https://packaging.python.org/tutorials/installing-packages/) upfront. 
 ```
 $ cd <PATH/TO/SOURCES>
 $ python GUI.py
 ```
 
-##  How to use MSTopDif
+##  How to use MSTopDiff
 1. Acquire or download mass spectrometric raw data of intact proteins.
 2. Deconvolute raw data with FLASHDeconv (Jeong, 2020) or ProMEX (Park, 2017) using e.g. [Mash explorer](https://labs.wisc.edu/gelab/MASH_Explorer/MASHSoftware.php) (Wu, 2020) or stand-alone versions.
-3. [Run MSTopDif](#how-to-run-mstopdif) python script.
+3. [Run MSTopDiff](#how-to-run-mstopdiff) python script.
 4. Press "Open file" to select deconvoluted mass feature file (`.tsv`, `.ms1ft`, `.csv` or other file format)
 5. Select the deconvolution algorithm that generated the mass feature file
 6. Optional: change default filter criteria (mass range, bin size, maximal charge and retention time difference)
@@ -124,7 +124,7 @@ To test the Script you can download the datasets in the "Datasets" folder, which
 
 
 ## Results
-_MSTopDif generates three plots._
+_MSTopDiff generates three plots._
 
 ### Histogram
 The calculated mass differences are presented as a classical histogram with a variable bin size defining the resolution of the plot. Here, the distinct number of mass differences found within a specific bin are displayed. 
