@@ -16,8 +16,8 @@
 ## Contents
 - [Abstract](#abstract)
 - [Requirements](#requirements)
-- [How to run MSTopDiff](#how-to-run-mstopdif)
-- [How to use MSTopDiff](#how-to-use-mstopdif)
+- [How to run MSTopDiff](#how-to-run-mstopdiff)
+- [How to use MSTopDiff](#how-to-use-mstopdiff)
 - [Data Sets for Testing](#data-sets-for-testing)
 - [Graphical User Interface](#graphical-user-interface)
 - [Results](#results)
