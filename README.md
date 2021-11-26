@@ -143,13 +143,12 @@ The last plot constitutes a variation of the intensity-based plot that pushes em
 | The GUI freezes during the calculation. | The freezing of the graphical user interface is due to the computationally intensive calculation of the mass differences. Depending on the data and your computer configuration, the calculation may take a while. It is important that you do not close the graphical user interface until the calculations are complete. There is an output in the console that shows the estimated percentage of data already processed. |
 
 ## References
-- [Wu, Z.; Roberts, D.S.; Melby, J.A.; Wenger, K.; Wetzel, M.; Gu, Y.; Ramanathan, S.G.; Bayne, E.F.; Liu, X.; Sun, R.; Ong, I.M.; McIlwain, S.J.; **Ge, Y.** MASH Explorer: A Universal Software Environment for Top-Down Proteomics., *J. Proteome Res.*, 2020, 19 (9), 3867-3876.](https://pubmed.ncbi.nlm.nih.gov/32786689/)
+- [Wu, Z.; Roberts, D.S.; Melby, J.A.; Wenger, K.; Wetzel, M.; Gu, Y.; Ramanathan, S.G.; Bayne, E.F.; Liu, X.; Sun, R.; Ong, I.M.; McIlwain, S.J.; Ge, Y. MASH Explorer: A Universal Software Environment for Top-Down Proteomics., *J. Proteome Res.*, 2020, 19 (9), 3867-3876.](https://pubmed.ncbi.nlm.nih.gov/32786689/)
 - [Jeong, K., Kim, J., Gaikwad, M., Hidayah, S.N., Heikaus, L., Schlüter, H., and Kohlbacher, O. (2020). FLASHDeconv: Ultrafast, High-Quality Feature Deconvolution for Top-Down Proteomics. *Cell Syst.*, 10, 213-218.e6.](https://www.sciencedirect.com/science/article/pii/S2405471220300302)
 - [Park, J., Piehowski, P.D., Wilkins, C., Zhou, M., Mendoza, J., Fujimoto, G.M., Gibbons, B.C., Shaw, J.B., Shen, Y., Shukla, A.K., Moore, R.J., Liu, T., Petyuk, V.A., Tolić, N., Paša-Tolić, L., Smith, R.D., Payne, S.H., and Kim, S. (2017). Informed-Proteomics: Open-source software package for top-down proteomics. *Nat. Methods*, 14, 909–914.](https://www.nature.com/articles/nmeth.4388)
 
-## How to cite the script
-If you are using the script, please cite:
-...
+## How to cite 
+Kaulich, P. T.; Winkels, K.; Kaulich, T. B.; Treitz, C.; Cassidy, L.; Tholey, A. MSTopDiff: A Tool for the Visualization of Mass Shifts in Deconvoluted Top-down Proteomics Data for the Database-Independent Detection of Protein Modifications. J. Proteome Res. **2021**. https://doi.org/doi.org/10.1021/acs.jproteome.1c00766.
 
 
 ## License
