@@ -148,7 +148,7 @@ The last plot constitutes a variation of the intensity-based plot that pushes em
 - [Park, J., Piehowski, P.D., Wilkins, C., Zhou, M., Mendoza, J., Fujimoto, G.M., Gibbons, B.C., Shaw, J.B., Shen, Y., Shukla, A.K., Moore, R.J., Liu, T., Petyuk, V.A., Tolić, N., Paša-Tolić, L., Smith, R.D., Payne, S.H., and Kim, S. (2017). Informed-Proteomics: Open-source software package for top-down proteomics. *Nat. Methods*, 14, 909–914.](https://www.nature.com/articles/nmeth.4388)
 
 ## How to cite 
-Kaulich, P. T.; Winkels, K.; Kaulich, T. B.; Treitz, C.; Cassidy, L.; Tholey, A. MSTopDiff: A Tool for the Visualization of Mass Shifts in Deconvoluted Top-down Proteomics Data for the Database-Independent Detection of Protein Modifications. J. Proteome Res. **2021**. https://doi.org/doi.org/10.1021/acs.jproteome.1c00766.
+Kaulich, P. T.; Winkels, K.; Kaulich, T. B.; Treitz, C.; Cassidy, L.; Tholey, A. MSTopDiff: A Tool for the Visualization of Mass Shifts in Deconvoluted Top-down Proteomics Data for the Database-Independent Detection of Protein Modifications. J. Proteome Res. **2021**. https://pubs.acs.org/doi/10.1021/acs.jproteome.1c00766.
 
 
 ## License
