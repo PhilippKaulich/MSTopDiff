@@ -83,7 +83,7 @@ To test the Script you can download the datasets in the "Datasets" folder, which
 | Entry | Description |
 | --- | --- |
 | Open file | Opens file dialog to chose a deconvoluted mass feature file.<br>_Note: It is not possible to choose raw files; they have before been deconvoluted using deconvolution algorithms._ |
-| Used deconvolution algorithm | Select used deconvolution algorithm. Supported are `FLASHDeconv`, `ProMEX` or `TopFD`. |
+| Used deconvolution algorithm | Select used deconvolution algorithm. Supported are `FLASHDeconv`, `ProMEX`, `TopFD` or `BioPharma Finder`. |
 | Plot masses | Plot monoisotopic masses over retention time (x: retention time, y: monoisotopic mass, z (color-coded): intensity). The radii of the points represent the elution duration. |
 | Mass Feature Filter > From ... to ... kDa | Minimal and maximal monoisotopic mass of mass features that are considered for the calculation of mass differences |
 | Delta Mass parameters > From ... to ... Da | Only mass shifts from ... to ... Da are shown in the resulting plots |
