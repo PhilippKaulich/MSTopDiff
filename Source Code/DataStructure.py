@@ -84,22 +84,50 @@ class DataMS1:
         #Exclude all mass features with proteform mass above mw_cutoff
         data = data[data[properties.mass]<float(mw_cutoff_max)]
         data = data[data[properties.mass]>float(mw_cutoff_min)]
-                
         
-        # Initializing of important deconvoluted features as list
+        
+        if deconv_alg == "BioPharma":
+            self.load_data_biopharma(data, properties)
+        else: 
+            # Initializing of important deconvoluted features as list
+            self.mono_list = data[properties.mass].to_list()
+            self.elution_time_start = data[properties.rt_start].to_list()
+            self.elution_time_end = data[properties.rt_end].to_list()
+            self.elution_time: list[int] = [(start+end)/2 for start, end in \
+                            zip(self.elution_time_start, self.elution_time_end)]
+            self.elution_duration: list[int] = [end-start for start,end in \
+                            zip(self.elution_time_start, self.elution_time_end)]
+            self.min_charge = data[properties.charge_min].to_list()
+            self.max_charge = data[properties.charge_max].to_list()
+            self.abundance = data[properties.abundance].to_list()
+            self.rt_factor = properties.rt_factor
+            self.number_of_elements = len(self.mono_list)
+        
+        
+    def load_data_biopharma(self, data, properties):
+        """ own function due to different data structure of BioPharma 
+            deconvolution results """
+        print ("Note: Since this file type does not provide information about "
+               "the charge state, the maximum charge difference cannot be "
+               "considered.")            
         self.mono_list = data[properties.mass].to_list()
-        self.elution_time_start = data[properties.rt_start].to_list()
-        self.elution_time_end = data[properties.rt_end].to_list()
+        elution_time = data[properties.rt_start].to_list()
+        self.elution_time_start = [float(i.split("-")[0]) for i in elution_time]
+        self.elution_time_end = [float(i.split("-")[1]) for i in elution_time]
+        
         self.elution_time: list[int] = [(start+end)/2 for start, end in \
                         zip(self.elution_time_start, self.elution_time_end)]
         self.elution_duration: list[int] = [end-start for start,end in \
                         zip(self.elution_time_start, self.elution_time_end)]
-        self.min_charge = data[properties.charge_min].to_list()
-        self.max_charge = data[properties.charge_max].to_list()
+            
+        self.min_charge = [0 for i in self.elution_time_start]
+        self.max_charge = [0 for i in self.elution_time_start]
         self.abundance = data[properties.abundance].to_list()
         self.rt_factor = properties.rt_factor
         self.number_of_elements = len(self.mono_list)
         
+        
+
         
         
     def remove_isotopic_errors(self):
