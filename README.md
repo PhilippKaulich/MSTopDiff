@@ -144,7 +144,8 @@ The last plot constitutes a variation of the intensity-based plot that pushes em
 
 ## Changelog
 - v1.0.1 (01 November 2021) Added percentage progress output for mass difference calculations and histogram generation.
-- v1.0.2 (05 June 2022) Added support for deconvoluted BioPharma result files.
+- v1.0.2 (09 March 2022) Minor Bugfixes.
+- v1.0.3 (05 June 2022) Added support for deconvoluted BioPharma result files.
 
 ## References
 - [Wu, Z.; Roberts, D.S.; Melby, J.A.; Wenger, K.; Wetzel, M.; Gu, Y.; Ramanathan, S.G.; Bayne, E.F.; Liu, X.; Sun, R.; Ong, I.M.; McIlwain, S.J.; Ge, Y. MASH Explorer: A Universal Software Environment for Top-Down Proteomics., *J. Proteome Res.*, 2020, 19 (9), 3867-3876.](https://pubmed.ncbi.nlm.nih.gov/32786689/)
