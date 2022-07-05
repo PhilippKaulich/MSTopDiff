@@ -142,6 +142,10 @@ The last plot constitutes a variation of the intensity-based plot that pushes em
 | The export function is grayed out and not clickable, although a histogram has been calculated. | Close all histogram windows and try again. |
 | The GUI freezes during the calculation. | The freezing of the graphical user interface is due to the computationally intensive calculation of the mass differences. Depending on the data and your computer configuration, the calculation may take a while. It is important that you do not close the graphical user interface until the calculations are complete. There is an output in the console that shows the estimated percentage of data already processed. |
 
+## Changelog
+- v1.0.1 (01 November 2021) Added percentage progress output for mass difference calculations and histogram generation.
+- v1.0.2 (05 June 2022) Added support for deconvoluted BioPharma result files.
+
 ## References
 - [Wu, Z.; Roberts, D.S.; Melby, J.A.; Wenger, K.; Wetzel, M.; Gu, Y.; Ramanathan, S.G.; Bayne, E.F.; Liu, X.; Sun, R.; Ong, I.M.; McIlwain, S.J.; Ge, Y. MASH Explorer: A Universal Software Environment for Top-Down Proteomics., *J. Proteome Res.*, 2020, 19 (9), 3867-3876.](https://pubmed.ncbi.nlm.nih.gov/32786689/)
 - [Jeong, K., Kim, J., Gaikwad, M., Hidayah, S.N., Heikaus, L., Schlüter, H., and Kohlbacher, O. (2020). FLASHDeconv: Ultrafast, High-Quality Feature Deconvolution for Top-Down Proteomics. *Cell Syst.*, 10, 213-218.e6.](https://www.sciencedirect.com/science/article/pii/S2405471220300302)
