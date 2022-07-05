@@ -25,7 +25,7 @@
     - [Intensity-based histogram](#intensity-based-histogram)
     - [Intensity×Count histogram](#IntensityxCount-histogram)
 - [Troubleshooting](#troubleshooting)
-- [Changelog] (#Changelog)
+- [Changelog](#changelog)
 - [References](#references)
 - [License](#license)
 
