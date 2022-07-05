@@ -13,7 +13,7 @@ class DeconvColumns:
         Provides the column names of mass feature files for different 
         deconvolution algorithms: Monoisotopic mass, retention time start and
         end, minimal and maximal charge, abundance, rt-factor (seconds or minutes)
-        Supported: FlashDeconv, ProMEX, TopFD 
+        Supported: FlashDeconv, ProMEX, TopFD, BioPharma
 
         Parameters
         ----------
@@ -26,9 +26,11 @@ class DeconvColumns:
         None.
 
         """
+        print("deconv_alg", deconv_alg)
         if deconv_alg == "FLASHDeconv": self.flashdeconv()
         elif deconv_alg == "ProMEX": self.promex()
         elif deconv_alg == "TopFD": self.topfd()
+        elif deconv_alg == "BioPharma": self.biopharma()
         else: print ("Not supported deconvolution algorithm"); return False
         
     def flashdeconv(self):
@@ -60,3 +62,15 @@ class DeconvColumns:
         self.charge_max = "Maximum_charge_state"
         self.abundance = "Intensity"
         self.rt_factor = 60
+        
+        
+    def biopharma(self):
+        """ Column names after deconvolution with BioPharma """
+        self.mass = "Monoisotopic_Mass"
+        self.rt_start = "RT_Range"
+        self.rt_end = "RT_Range"
+        self.charge_min = "Number_of_Charge_States"
+        self.charge_max = "Number_of_Charge_States"
+        self.abundance = "Sum_Intensity"
+        self.rt_factor = 60
+        
