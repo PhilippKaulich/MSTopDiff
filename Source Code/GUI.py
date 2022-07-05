@@ -15,8 +15,13 @@ from Settings import Settings
 from DataStructure import General
 
 
-# enable scaling high-DPI mode 
+# enable scaling high DPI mode 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) 
+# if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+#     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+
+# if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+#     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -64,8 +69,8 @@ class Ui(QtWidgets.QMainWindow):
     
     def open_file(self):
         self.setWindowTitle(Settings.gui_title + " - Open file ...")
-        file_filter = 'Deconvoluted mass feature file (*.tsv *.ms1ft *ms1.feature);; All Files (*)'
-        initialFilter = 'Deconvoluted mass feature file (*.tsv *.ms1ft *ms1.feature)'
+        file_filter = 'Deconvoluted mass feature file (*.tsv *.ms1ft *ms1.feature *.csv) ;; All Files (*)'
+        initialFilter = 'Deconvoluted mass feature file (*.tsv *.ms1ft *ms1.feature *.csv)'
         self.file_name = QFileDialog.getOpenFileName(caption = 'Load results',
             directory = '', filter = file_filter, initialFilter = initialFilter)[0]
         self.text_open_file.setText(self.file_name.split("/")[-1])
