@@ -64,7 +64,8 @@ class DataMS1:
 
         
     def load_data(self, file, deconv_alg, mw_cutoff_min = 0, 
-                  mw_cutoff_max = 100_000):
+                  mw_cutoff_max = 100_000, time_cutoff_min = 0, 
+                  time_cutoff_max = 1000000):
         """ load data from deconvolution algorithms """
         if not file:
             print ("Please first select a deconvoluted mass feature file")
@@ -72,6 +73,8 @@ class DataMS1:
         self.file_localisation = file
         self.mw_cutoff_min = mw_cutoff_min
         self.mw_cutoff_max = mw_cutoff_max
+        self.time_cutoff_min = time_cutoff_min
+        self.time_cutoff_max = time_cutoff_max
         self.deconv_alg = deconv_alg
         # Checking if loaded file is comma or tab separated
         sep = "," if file.endswith(".csv") else "\t"
@@ -80,54 +83,37 @@ class DataMS1:
         
         # Load properties for different deconv alg
         properties = DeconvColumns(deconv_alg)
-        
-        #Exclude all mass features with proteform mass above mw_cutoff
+        #Exclude all mass features with mass not within mass cutoffs
         data = data[data[properties.mass]<float(mw_cutoff_max)]
         data = data[data[properties.mass]>float(mw_cutoff_min)]
-        
-        
-        if deconv_alg == "BioPharma":
-            self.load_data_biopharma(data, properties)
-        else: 
-            # Initializing of important deconvoluted features as list
-            self.mono_list = data[properties.mass].to_list()
-            self.elution_time_start = data[properties.rt_start].to_list()
-            self.elution_time_end = data[properties.rt_end].to_list()
-            self.elution_time: list[int] = [(start+end)/2 for start, end in \
-                            zip(self.elution_time_start, self.elution_time_end)]
-            self.elution_duration: list[int] = [end-start for start,end in \
-                            zip(self.elution_time_start, self.elution_time_end)]
-            self.min_charge = data[properties.charge_min].to_list()
-            self.max_charge = data[properties.charge_max].to_list()
-            self.abundance = data[properties.abundance].to_list()
-            self.rt_factor = properties.rt_factor
-            self.number_of_elements = len(self.mono_list)
-        
-        
-    def load_data_biopharma(self, data, properties):
-        """ own function due to different data structure of BioPharma 
-            deconvolution results """
-        print ("Note: Since this file type does not provide information about "
-               "the charge state, the maximum charge difference cannot be "
-               "considered.")            
+
+        # Biopharma provides less information compared to other devonvolution
+        # algorithms
+        if deconv_alg == "BioPharma":        
+            print ("Note: Since this file type does not provide information about "
+                       "the charge state, the maximum charge difference cannot be "
+                       "considered.")          
+            # RT-range: xy - zy : Split into two columns
+            data[[properties.rt_start, properties.rt_end]] = \
+                data[properties.rt_start].str.split(' - ', expand=True).astype(float)
+        # Exclude all mass features with retention time not within time cutoffs
+        self.rt_factor = properties.rt_factor
+        data = data[data[properties.rt_start]<float(time_cutoff_max)*self.rt_factor]
+        data = data[data[properties.rt_start]>float(time_cutoff_min)*self.rt_factor]
+        # Initializing of important deconvoluted features as list
         self.mono_list = data[properties.mass].to_list()
-        elution_time = data[properties.rt_start].to_list()
-        self.elution_time_start = [float(i.split("-")[0]) for i in elution_time]
-        self.elution_time_end = [float(i.split("-")[1]) for i in elution_time]
-        
+        self.elution_time_start = data[properties.rt_start].to_list()
+        self.elution_time_end = data[properties.rt_end].to_list()
         self.elution_time: list[int] = [(start+end)/2 for start, end in \
                         zip(self.elution_time_start, self.elution_time_end)]
         self.elution_duration: list[int] = [end-start for start,end in \
                         zip(self.elution_time_start, self.elution_time_end)]
-            
-        self.min_charge = [0 for i in self.elution_time_start]
-        self.max_charge = [0 for i in self.elution_time_start]
+        self.min_charge = data[properties.charge_min].to_list()
+        self.max_charge = data[properties.charge_max].to_list()
         self.abundance = data[properties.abundance].to_list()
-        self.rt_factor = properties.rt_factor
         self.number_of_elements = len(self.mono_list)
         
         
-
         
         
     def remove_isotopic_errors(self):
@@ -413,5 +399,3 @@ class General:
                 line = "{:,.3f}, {}, {:,.3f} \n".format(mass_difference, count, ratio)
             all_peaks.append(line)
         return "".join(all_peaks)
-        
-        
