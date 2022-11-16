@@ -77,7 +77,7 @@ To test the Script you can download the datasets in the "Datasets" folder, which
 
 ## Graphical User Interface
 <p align="center">
-<img src="![20221116_GUI](https://user-images.githubusercontent.com/65888185/202125092-3fc8dc66-d004-4092-b4ba-c6c1eda3f263.PNG)
+<img src="https://user-images.githubusercontent.com/65888185/202125092-3fc8dc66-d004-4092-b4ba-c6c1eda3f263.PNG"
 " alt="GUI">
 </p>
 
