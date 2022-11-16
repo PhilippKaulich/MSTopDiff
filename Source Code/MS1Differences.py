@@ -26,7 +26,9 @@ class MS1Differences():
     def load_file(self, file: str, 
                   deconv_type: str = Settings.deconvolution_algorithm,
                   mw_cutoff_min: int = Settings.massfeature_mass_min,
-                  mw_cutoff_max: int = Settings.massfeature_mass_max) -> None:
+                  mw_cutoff_max: int = Settings.massfeature_mass_max, 
+                  time_cutoff_min: int = Settings.massfeature_time_min, 
+                  time_cutoff_max: int = Settings.massfeature_time_max) -> None:
         """
         Load mass feature file. 
 
@@ -50,8 +52,11 @@ class MS1Differences():
         """
         self.Data = DataStructure.DataMS1()
         try:
-            self.Data.load_data(file, deconv_type, mw_cutoff_min = 0, 
-                                mw_cutoff_max = mw_cutoff_max)
+            self.Data.load_data(file, deconv_type, 
+                                mw_cutoff_min = mw_cutoff_min, 
+                                mw_cutoff_max = mw_cutoff_max,
+                                time_cutoff_min = time_cutoff_min, 
+                                time_cutoff_max = time_cutoff_max)
         except:
             print ("Please select the right deconvolution algorithm")
             print ("If the deconvolution algorithm is correct, the file "
@@ -66,18 +71,27 @@ class MS1Differences():
             
     def plotMono(self, file: str, deconv_type: str = Settings.deconvolution_algorithm, 
                    mw_cutoff_min: int = Settings.massfeature_mass_min, 
-                   mw_cutoff_max: int = Settings.massfeature_mass_max) -> None:
+                   mw_cutoff_max: int = Settings.massfeature_mass_max,
+                   time_cutoff_min: int = Settings.massfeature_time_min, 
+                   time_cutoff_max: int = Settings.massfeature_time_max) -> None:
         """ Plot monoisotopic mass over retention time with intensity color scale;  
             the radii of data points is proportional to the elution length """
-        if not self.load_file(file, deconv_type, mw_cutoff_min, mw_cutoff_max):
+        if not self.load_file(file, deconv_type, mw_cutoff_min, mw_cutoff_max, 
+                              time_cutoff_min, time_cutoff_max):
             return False
         plt.figure()
-        plt.scatter(self.Data.elution_time, self.Data.mono_list, 
+        # adjust RT according to rt_factor
+        elution_time = [et/self.Data.rt_factor for et in 
+                        self.Data.elution_time]
+        elution_duration = [ed/self.Data.rt_factor for ed in 
+                            self.Data.elution_duration]
+        # plot monoisotopic mass against retention tim
+        plt.scatter(elution_time, self.Data.mono_list, 
                     c = self.Data.abundance, norm = matplotlib.colors.LogNorm(), 
-                    s = self.Data.elution_duration, cmap="Greens")
-        plt.colorbar()
+                    s = elution_duration, cmap="Greens")
         plt.xlabel("Retention Time / min")
         plt.ylabel("Monoisotopic mass / Da")
+        plt.colorbar(label="Abundance")
         plt.show()
 
     
@@ -102,12 +116,14 @@ class MS1Differences():
         
         
     def _elution_time_difference(self, mass1: float, mass2: float, 
-                        elution_time1: float, elution_time2: float) -> float:
+                        elution_time1: float, elution_time2: float, 
+                        rt_factor: int) -> float:
         """ calculates the retention time difference, using the lower mass as 
             reference:  RT(higher_mass) - RT(lower_mass) """
         # Elution time difference with lower mass as reference
         elution_time_difference: float = elution_time1 - elution_time2 if mass1 > mass2 \
             else elution_time2 - elution_time1
+        elution_time_difference = elution_time_difference * (60/ rt_factor)
         return elution_time_difference
 
     
@@ -159,7 +175,7 @@ class MS1Differences():
 
         """
         # save Data settings
-        self.Data.rt_diff_max = rt_diff_max
+        self.Data.rt_diff_max = rt_diff_max 
         self.Data.charge_diff_max = charge_diff_max
         
         # progress
@@ -201,7 +217,7 @@ class MS1Differences():
                       mass1, mass2, abundance1, abundance2)
                   
                 rt_difference = self._elution_time_difference(
-                    mass1, mass2, elution_time1, elution_time2)
+                    mass1, mass2, elution_time1, elution_time2, self.Data.rt_factor)
                 
                 self.Data.Results.add_mass_difference(mass_difference, 
                     higher_mass, higher_mass_intensity, lower_mass, 
@@ -260,12 +276,17 @@ class MS1Differences():
                     mass, tolerance = tolerance)
         min_rt_shift: float = min(rt_shifts)
         max_rt_shift: float = max(rt_shifts)
+        rt_shifts = [i/60 for i in rt_shifts]
         self.Data.Results.retention_time_shift: list = rt_shifts
-        #   bin-size: 0.5 min 
-        number_of_bins = int((max_rt_shift - min_rt_shift) / 
-                    (self.Data.rt_factor / (1 / bin_size)))
+        bin_size = bin_size 
+        number_of_bins = int((max_rt_shift - min_rt_shift) / bin_size)# / 
+                    #(self.Data.rt_factor / (1 / bin_size)))
         plt.figure()
-        plt.hist(rt_shifts, number_of_bins)
+        plt.hist(rt_shifts, number_of_bins, facecolor='g')
+        plt.xlabel("Retention time shift / min")
+        plt.ylabel("Count")
+        plt.title("{}±{} Da".format(mass, tolerance))
+        plt.grid(True)
         plt.show()
         return rt_shifts
     
@@ -308,7 +329,5 @@ class MS1Differences():
     
     
     def export_results(self):
-        """ """
+        """ returns all results - Data and generated Histogram """
         return self.Data.Results.results, self.Data.Results.histogram
-            
-        
