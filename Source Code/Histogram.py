@@ -99,7 +99,7 @@ class Histogram:
     
     
     def _plot(self,x: list, y: list, xlabel: str = "", ylabel: str = "", 
-              title: str = "",
+              title: str = "", legend: bool = False, label: str = "",
               plot_options: dict = {"bin_size":0.001,
                                     "annot":True, 
                                     "height":0.05, 
@@ -122,6 +122,10 @@ class Histogram:
             y-label. The default is "".
         title : str, optional
             Plot title. The default is "".
+        legend : bool, optional
+            Plot legend. The default is False.
+        Label : str, optional
+            Label for Legend. Only shown if legend = True. The default is "".
         plot_options : dict, optional
             Plot options, see "plot_deltaMass". 
         new_plot : TYPE, optional
@@ -130,15 +134,15 @@ class Histogram:
         Returns
         -------
         None
-            DESCRIPTION.
 
         """
         if new_plot: plt.figure()
+        plt.plot(x, y, label = label)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.title(title)
-        if plot_options["x-axis"]: plt.xlim(plot_options["x-axis"])#(0, 300))#plot_options["bin_size"])#[int(i) / plot_options["bin_size"] for i in plot_options["x-axis"]])
-        plt.plot(x, y)
+        if legend: plt.legend()
+        if plot_options["x-axis"]: plt.xlim(plot_options["x-axis"])
         if plot_options["annot"]:
             peaks, _ = find_peaks(y, 
                 distance=plot_options["distance"]/plot_options["bin_size"], 
@@ -233,7 +237,8 @@ class Histogram:
         x_axis: list = plot_options["x-axis"]
         # Plotting clasical histogram
         if plot_options["number"]:
-            self._plot(hist_bins, hist_numbers, xlabel="ΔMass", ylabel="Count", 
+            self._plot(hist_bins, hist_numbers, xlabel="Mass shift / Da", 
+                       ylabel="Count", 
                        plot_options={"bin_size":bin_size,"annot":annot, 
                                      "height":height, "distance":distance, 
                                      "round":2, "x-axis": x_axis})
@@ -242,13 +247,15 @@ class Histogram:
         if plot_options["intensity"]:
             # Lower mass abundance (normalized to maximum abundance)
             self._plot(hist_bins, self._normalizeList(hist_values1), 
-                       xlabel="ΔMass", ylabel="Rel. Intensity",
+                       xlabel="Mass shift / Da", ylabel="Rel. Intensity",
+                       label = "Lower mass",
                        plot_options={"bin_size":bin_size,"annot":annot, 
                                      "height":height, "distance":distance, 
                                      "round":2, "x-axis": x_axis})
             # Higher mass abundance (normalized to maximum of lower mass abundance)
             self._plot(hist_bins, self._normalizeList(hist_values2, max(hist_values1)), 
-                       xlabel="ΔMass", ylabel="Rel. Intensity",
+                       xlabel="Mass shift / Da", ylabel="Rel. Intensity",
+                       legend = True, label = "Higher mass",
                        plot_options={"bin_size":bin_size,"annot":False, 
                                      "height":height, "distance":distance, 
                                      "round":2, "x-axis": x_axis}, 
@@ -266,18 +273,19 @@ class Histogram:
         if plot_options["nI"]:
             # Lower mass (normalized values)
             self._plot(hist_bins, self._normalizeList(hist_numbersXvalues1), 
-                       xlabel="ΔMass", ylabel="Rel. Intensit*Count",
+                       xlabel="Mass shift / Da", ylabel="Rel. Intensity*Count",
+                       label = "Lower mass",
                        plot_options={"bin_size":bin_size,"annot":annot, 
                                      "height":height, "distance":distance, 
                                      "round":2, "x-axis": x_axis})
             # Higher mass (normalized to maximum of lower mass values)
             self._plot(hist_bins, self._normalizeList(hist_numbersXvalues2,
                                                       max(hist_numbersXvalues1)), 
-                       xlabel="ΔMass", ylabel="Rel. Intensity*Count",
+                       xlabel="Mass shift / Da", ylabel="Rel. Intensity*Count",
+                       legend = True, label = "Higher mass",
                        plot_options={"bin_size":bin_size,"annot":False, 
                                      "height":height, "distance":distance, 
                                      "round":2, "x-axis": x_axis}, new_plot=False)
         plt.show()
         return list(zip(hist_bins, hist_numbers, hist_values1, hist_values2, \
             hist_numbersXvalues1, hist_numbersXvalues2))
-            
