@@ -10,8 +10,8 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'MSTopDif',
-    version = '1.0.0',
-    url = '',
+    version = '1.1.0',
+    url = 'https://github.com/PhilippKaulich/MSTopDiff',
     author = 'Philipp Theodor Kaulich',
     author_email = 'p.kaulich@iem.uni-kiel.de',
     description = 'MSTopDif is a command line script with graphical user'
