@@ -26,7 +26,6 @@ class DeconvColumns:
         None.
 
         """
-        print("deconv_alg", deconv_alg)
         if deconv_alg == "FLASHDeconv": self.flashdeconv()
         elif deconv_alg == "ProMEX": self.promex()
         elif deconv_alg == "TopFD": self.topfd()
@@ -68,9 +67,8 @@ class DeconvColumns:
         """ Column names after deconvolution with BioPharma """
         self.mass = "Monoisotopic_Mass"
         self.rt_start = "RT_Range"
-        self.rt_end = "RT_Range"
+        self.rt_end = "RT_End"
         self.charge_min = "Number_of_Charge_States"
         self.charge_max = "Number_of_Charge_States"
         self.abundance = "Sum_Intensity"
-        self.rt_factor = 60
-        
+        self.rt_factor = 1
