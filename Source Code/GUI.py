@@ -39,6 +39,8 @@ class Ui(QtWidgets.QMainWindow):
         self.setWindowTitle(Settings.gui_title)
         self.text_massfeature_mass_min.setText(str(Settings.massfeature_mass_min))
         self.text_massfeature_mass_max.setText(str(int(Settings.massfeature_mass_max)))
+        self.text_massfeature_time_min.setText(str(Settings.massfeature_time_min))
+        self.text_massfeature_time_max.setText(str(int(Settings.massfeature_time_max)))
         self.text_deltamass_mass_min.setText(str(Settings.deltamass_mass_min))
         self.text_deltamass_mass_max.setText(str(Settings.deltamass_mass_max))
         self.text_massdifference_bin_size.setText(str(Settings.deltamass_bin_size))
@@ -89,7 +91,9 @@ class Ui(QtWidgets.QMainWindow):
         deconv_alg = self.combobox_deconv_algorithm.currentText()
         mw_min = float(self.text_massfeature_mass_min.toPlainText()) * 1000
         mw_max = float(self.text_massfeature_mass_max.toPlainText()) * 1000
-        self.MS1_diff.plotMono(file, deconv_alg, mw_min, mw_max)
+        time_min = float(self.text_massfeature_time_min.toPlainText())
+        time_max = float(self.text_massfeature_time_max.toPlainText())
+        self.MS1_diff.plotMono(file, deconv_alg, mw_min, mw_max, time_min, time_max)
         self.setWindowTitle(Settings.gui_title + " - Masse ploted")
     
     
@@ -99,12 +103,14 @@ class Ui(QtWidgets.QMainWindow):
         deconv_alg = self.combobox_deconv_algorithm.currentText()
         mf_mass_min = float(self.text_massfeature_mass_min.toPlainText()) * 1000
         mf_mass_max = float(self.text_massfeature_mass_max.toPlainText()) * 1000
+        mf_time_min = float(self.text_massfeature_time_min.toPlainText())
+        mf_time_max = float(self.text_massfeature_time_max.toPlainText())
         rt_window = float(self.text_massfeature_rt_window.value())
         max_charge_diff = int(self.text_massfeature_max_charge_diff.value())
         dm_mass_min = float(self.text_deltamass_mass_min.toPlainText())
-        dm_mass_max = float(self.text_deltamass_mass_max.toPlainText())
-# dm min dm max in load einbauen!         
-        self.MS1_diff.load_file(self.file_name, deconv_alg, mf_mass_min, mf_mass_max)
+        dm_mass_max = float(self.text_deltamass_mass_max.toPlainText())       
+        self.MS1_diff.load_file(self.file_name, deconv_alg, mf_mass_min, 
+                                mf_mass_max, mf_time_min, mf_time_max)
         self.MS1_diff.calculateMS1Differences(rt_window, max_charge_diff, 
                                               dm_mass_min, dm_mass_max)
         self.setWindowTitle(Settings.gui_title + " - Data loaded")        
@@ -150,10 +156,8 @@ class Ui(QtWidgets.QMainWindow):
     def plot_rt_shift(self):
         self.setWindowTitle(Settings.gui_title + " - Calculate RT shift ...")
         mass = float(self.text_retentiontime_shift_mass.toPlainText()) 
-        tolerance = float(self.text_retentiontime_shift_tolerance.toPlainText())
-# 60 rausbekommen! 
-        bin_size = self.text_retentiontime_shift_bin_size.value() / 60
-        print(bin_size)
+        tolerance = float(self.text_retentiontime_shift_tolerance.toPlainText()) 
+        bin_size = self.text_retentiontime_shift_bin_size.value() 
         self.rt_shift = self.MS1_diff.plot_RTShift(mass, tolerance, bin_size)
         self.setWindowTitle(Settings.gui_title + " - RT shift calculated")
         self.enable_widget(self.button_export_rt_shift_data)
