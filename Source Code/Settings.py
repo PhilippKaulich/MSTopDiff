@@ -18,10 +18,14 @@ class Settings:
     massfeature_mass_min: float = 0
     # Maximal mass of considered mass feature (in kDa)
     massfeature_mass_max: float = 100
+    #Minimal elution time of mass features  considered for analysis (in min)
+    massfeature_time_min = 0
+    #Maximal elution time of mass features  considered for analysis (in min)
+    massfeature_time_max = 210
     # Minimal considered mass difference (in Da)
     deltamass_mass_min: float = 0
     # Maximal considered mass difference (in Da)
-    deltamass_mass_max: float = 1_500
+    deltamass_mass_max: float = 300
     # Maximal charge difference (lowest and highest charge state) of 
     # considered mass feature paires for the calculation of mass differences
     deltamass_charge_diff_max: int = 2    
@@ -98,10 +102,3 @@ class Settings:
                 if mass in mod_dic: mod_dic[mass] += "__" + modification
                 mod_dic[mass] = modification
         return mod_dic
-    
-
-
-
-if __name__ == "__main__":
-    s = Settings()
-    d = s.load_possible_modifications("F:\\unimod.csv")
